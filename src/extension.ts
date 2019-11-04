@@ -9,18 +9,26 @@ export async function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "weatherext" is now active!');
 
 
-	let disposable = vscode.commands.registerCommand('extension.getWeather', () => {
+	let getWeather = vscode.commands.registerCommand('extension.getWeather', () => {
 
-		//	weatherStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-		vscode.window.showInputBox({value:'please enter your city'}).then(async city => {
+		vscode.window.showInputBox({ value: 'please enter your city' }).then(async city => {
 			const dataService: DataService = new DataService(city);
-			
+
 			const result = await dataService.getWeather();
 			console.log(result);
+			if (!weatherStatusBarItem) {
+				weatherStatusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
+			}
+			weatherStatusBarItem.text = result.city + ' ' + result.temperature + ' ' + result.description;
+			weatherStatusBarItem.show();
 		});
 	});
 
-	context.subscriptions.push(disposable);
+	let getWeatherMap = vscode.commands.registerCommand('extension.getWeatherMap', () => {
+
+	});
+
+	context.subscriptions.push(getWeather, getWeatherMap);
 }
 
 // this method is called when your extension is deactivated
