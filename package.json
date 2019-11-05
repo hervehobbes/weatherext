@@ -4,6 +4,7 @@
 	"description": "my awesome weather extension",
 	"version": "0.0.1",
 	"publisher": "barosanu",
+	"license": "UNLICENSED",
 	"engines": {
 		"vscode": "^1.39.0"
 	},
