@@ -24,39 +24,17 @@ export async function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
-	let getWeatherMap = vscode.commands.registerCommand('extension.getWeatherMap', () => {
+	let getWeatherExtended = vscode.commands.registerCommand('extension.getWeatherExtended', () => {
 		vscode.window.showInputBox({ value: 'please enter your city' }).then(async city => {
-			const mapUrl = await dataService.getWeatherMapUrl(city);
-			console.log(mapUrl);
-			const panel = vscode.window.createWebviewPanel(
-				'weatherMap',
-				'Weather Map',
-				vscode.ViewColumn.One,
-				{}
-			);
-			panel.webview.html = getWebWiewContent(mapUrl);
+			const extendedWeather = await dataService.getWeatherExtended(city);
+			vscode.window.showInformationMessage(JSON.stringify(extendedWeather));
+			console.log(extendedWeather);
 		});
 
 	});
 
-	context.subscriptions.push(getWeather);
-	context.subscriptions.push(getWeatherMap);
+	context.subscriptions.push(getWeather, getWeatherExtended);
 }
 
-function getWebWiewContent(url: string): string {
-	return `<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="Content-Security-Policy" content="default-src 'none';">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Cat Coding</title>
-	</head>
-	<body>
-		<img src="${url}"/>
-	</body>
-	</html>`;
-}
 
-// this method is called when your extension is deactivated
 export function deactivate() { }

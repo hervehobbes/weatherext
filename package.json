@@ -12,7 +12,7 @@
 	],
 	"activationEvents": [
 		"onCommand:extension.getWeather",
-		"onCommand:extension.getWeatherMap"
+		"onCommand:extension.getWeatherExtended"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -22,8 +22,8 @@
 				"title": "Weather: Get Weather"
 			},
 			{
-				"command": "extension.getWeatherMap",
-				"title": "Weather: Get Weather Map"
+				"command": "extension.getWeatherExtended",
+				"title": "Weather: Get Extended Weather"
 			}
 		]
 	},
