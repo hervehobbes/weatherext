@@ -26,10 +26,10 @@ export class DataService {
         };
     }
 
-    public async getWeatherMapUrl(city: string | undefined): Promise<String> {
+    public async getWeatherMapUrl(city: string | undefined): Promise<string> {
         const cw = await this.getWeather(city);
-        //return `https://tile.openweathermap.org/map/temp_new/3/${cw.lat}/${cw.lon}.png?appid=${apiKey}`;
-        return `https://openweathermap.org/weathermap?basemap=map&cities=false&layer=precipitation&lat=${cw.lat}&lon=${cw.lon}&zoom=10`;
+        return `https://tile.openweathermap.org/map/temp_new/3/${cw.lat}/${cw.lon}.png?appid=${apiKey}`;
+       // return `https://openweathermap.org/weathermap?basemap=map&cities=false&layer=precipitation&lat=${cw.lat}&lon=${cw.lon}&zoom=10`;
     }
 
 
